@@ -1,0 +1,1 @@
+echo 'Testing  how to send file to other repo'
