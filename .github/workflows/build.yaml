@@ -16,7 +16,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
     - run: rm -rf result*.zip
-    - run: mkdir test2
+    - run: mkdir ${{ github.workspace }}/test2
     - run: ls
     - name: push
       uses: actions-x/commit@v6
