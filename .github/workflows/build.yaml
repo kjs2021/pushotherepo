@@ -15,7 +15,7 @@ jobs:
     
     - name: checkout
       uses: actions/checkout@v2
-    - run: rm -rf reult*.zip
+    - run: rm -rf result*.zip
     - run: mkdir test2
     - run: ls
     - name: push
@@ -26,16 +26,16 @@ jobs:
     
     
     
-  zip-files:
-     runs-on: ubuntu-latest
+#   zip-files:
+#      runs-on: ubuntu-latest
      
-     steps:
-      - run: rm -rf reult*.zip
-      - uses: actions/checkout@v2
-      - run: ls
-      - uses: vimtor/action-zip@v1
-        with:
-          files: ${{github.workspace}}
-          dest: result-${{ github.sha }}.zip
-      - name: push
-        uses: actions-x/commit@v6
+#      steps:
+#       - run: rm -rf reult*.zip
+#       - uses: actions/checkout@v2
+#       - run: ls
+#       - uses: vimtor/action-zip@v1
+#         with:
+#           files: ${{github.workspace}}
+#           dest: result-${{ github.sha }}.zip
+#       - name: push
+#         uses: actions-x/commit@v6
