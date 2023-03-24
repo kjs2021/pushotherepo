@@ -1,41 +1,18 @@
-name: publish
-
+name: Repository Dispatch
 on:
   push:
     branches:
     - main
   workflow_dispatch:
 permissions: write-all
-    
 jobs:
-  build:
+ trigger:
+  runs-on: ubuntu-latest
+  steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          repository: kjs2021/maven
+          event-type: my-event
+          client-payload: '{"img": "4.8.0", "sha": "${{ github.sha }}"}'
   
-    runs-on: ubuntu-latest
-    steps:
-    
-    - name: checkout
-      uses: actions/checkout@v2
-    - run: rm -rf result*.zip
-    - run: mkdir ${{ github.workspace }}/test2
-    - run: ls
-    - name: push
-      uses: actions-x/commit@v6
-      with:
-       token: ${{ github.token }}
-       files: ${{ github.workspace }}
-    
-    
-    
-#   zip-files:
-#      runs-on: ubuntu-latest
-     
-#      steps:
-#       - run: rm -rf reult*.zip
-#       - uses: actions/checkout@v2
-#       - run: ls
-#       - uses: vimtor/action-zip@v1
-#         with:
-#           files: ${{github.workspace}}
-#           dest: result-${{ github.sha }}.zip
-#       - name: push
-#         uses: actions-x/commit@v6
