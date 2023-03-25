@@ -5,7 +5,7 @@ on:
     - main
   workflow_dispatch:
 env:
-  Image: Monday
+  Image: workflow_api
 permissions: write-all
 jobs:
  trigger:
