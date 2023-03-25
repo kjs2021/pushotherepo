@@ -11,11 +11,12 @@ jobs:
  trigger:
   runs-on: ubuntu-latest
   steps:
+      - run: echo 'Hi env is ${{ env.Image }}'
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.1.1
         with:
           token: ${{ secrets.PAT }}
           repository: kjs2021/maven
           event-type: my-event
-          client-payload: '{"img": "${{ env.Image }, "sha": "${{ github.sha }}"}'
+          client-payload: '{"img": "${{ env.Image }}", "sha": "${{ github.sha }}","repo";"{{ github.action_repository }}"}'
   
