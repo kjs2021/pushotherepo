@@ -18,5 +18,5 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: kjs2021/maven
           event-type: my-event
-          client-payload: '{"img": "${{ env.Image }}", "sha": "${{ github.sha }}","repo":"{{ github.action_repository }}"}'
+          client-payload: '{"img": "${{ env.Image }}", "sha": "${{ github.sha }}","repo": "${{ github.action_repository }}"}'
   
