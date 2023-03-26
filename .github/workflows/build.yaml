@@ -5,7 +5,7 @@ on:
     - main
   workflow_dispatch:
 env:
-  Image_name: workflow-api
+  Image_name: save-api
   Image_version: 1.0.18
 permissions: write-all
 jobs:
