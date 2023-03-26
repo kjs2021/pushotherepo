@@ -1,11 +1,11 @@
 name: Repository Dispatch
 on:
-#   push:
-#     branches:
-#     - main
+  push:
+    branches:
+    - main
   workflow_dispatch:
 env:
-  Image_name: workflow_api
+  Image_name: workflow-api
   Image_version: 1.0.15
 permissions: write-all
 jobs:
