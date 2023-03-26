@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 env:
   Image_name: workflow-api
-  Image_version: 1.0.15
+  Image_version: 1.0.18
 permissions: write-all
 jobs:
  trigger:
