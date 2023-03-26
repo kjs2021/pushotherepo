@@ -1,22 +1,25 @@
 name: Repository Dispatch
 on:
-  push:
-    branches:
-    - main
+#   push:
+#     branches:
+#     - main
   workflow_dispatch:
 env:
-  Image: workflow_api
+  Image_name: workflow_api
+  Image_version: 22.22.22
 permissions: write-all
 jobs:
  trigger:
   runs-on: ubuntu-latest
   steps:
-      - run: echo 'Hi env is ${{ env.Image }}'
+      - name: updated Imagename and Image version 
+        run: |
+         echo  "New Image will be  ${{ env.Image_name }}:${{ env.Image_version }}"
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.1.1
         with:
           token: ${{ secrets.PAT }}
           repository: kjs2021/maven
-          event-type: my-event
-          client-payload: '{"img": "${{ env.Image }}", "sha": "${{ github.sha }}","repo": "${{ github.action_repository }}"}'
+          event-type: workflow_api
+          client-payload: '{"img": "${{ env.Image }}", "sha": "${{ github.sha }}","Image_version": "${{ github.Image_version }}"}'
   
