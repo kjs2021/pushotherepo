@@ -21,5 +21,5 @@ jobs:
           token: ${{ secrets.PAT3 }}
           repository: kjs2021/maven
           event-type: workflow_api
-          client-payload: '{"img": "${{ env.Image_name }}", "sha": "${{ github.sha }}","Image_version": "${{ env.Image_version }}","event_type": "${{ github.event_type }}","event_type2": "workflow_api"}'
+          client-payload: '{"img": "${{ env.Image_name }}", "sha": "${{ github.sha }}","Image_version": "${{ env.Image_version }}","event_type": "${{ github.event.event_type }}","event_type2": "workflow_api"}'
   
