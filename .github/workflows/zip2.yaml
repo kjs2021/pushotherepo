@@ -1,0 +1,63 @@
+name: Create Archive
+on: 
+ push:
+    branches: [ "main" ]
+ workflow_dispatch:
+# permissions:
+#   contents: write
+#   id-token: write
+env:
+ Filename: Smart.search
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        persist-credentials: false 
+        fetch-depth: 0 
+        ref: main
+    - name: Create local changes
+      run: |
+        # rm -r Function
+        #       sed -i 's|flow|new-flow|' ${{ env.Filename }}
+        mkdir ${{ github.workspace }}/Function
+        zip Function/${{ env.Filename }}.zip ${{ github.workspace }}/* -x "*.git*"
+        ls -lrt
+#     - name: Commit & Push changes to same repo
+#       run: |
+#        cat ${{ github.workspace }}/test1
+#     - uses: actions-js/push@master
+#       with:
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
+#         branch: main
+#         message: 'Auto commit from github action ${{ env.Filename }}'
+        
+        
+#     - name: Pushes to Repository
+#       uses: tech-thinker/push-to-repo@main
+#       env:
+#        API_TOKEN_GITHUB: ${{ secrets.MAVEN_TOKEN }}
+#       with:
+#        user-name: "github-actions[bot]"
+#        user-email: github-actions[bot]@users.noreply.github.com
+#        source-directory: "Function"
+#        destination-github-username: "kjs2021"
+#        destination-repository-name: "maven/Function"
+#        target-branch: test-branch
+    
+    - name: Pushes test file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.MAVEN_TOKEN }}
+      with:
+        source_file: '${{ github.workspace }}/Function/${{ env.Filename }}.zip'
+        destination_repo: 'kjs2021/maven'
+        destination_folder: 'Function'
+        destination_branch: test-branch
+        user_email: 'kksaini6@yahoo.com'
+        user_name: 'kjs2021'
+        commit_message: 'A custom message for the commit ${{ env.Filename }}'   
+        
+        
