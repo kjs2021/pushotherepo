@@ -7,7 +7,7 @@ on:
      - Roll-back
 
 jobs:
- PUSH:
+ Roll:
   runs-on: ubuntu-latest
   steps:
    - name: Invoke workflow in another repo with inputs
