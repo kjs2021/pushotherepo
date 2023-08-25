@@ -2,7 +2,7 @@ name: push example
 
 on:
  workflow_dispatch:
-  push:
+ push:
     branches:
      - Roll-back
 
