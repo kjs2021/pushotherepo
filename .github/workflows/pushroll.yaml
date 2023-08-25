@@ -21,6 +21,6 @@ jobs:
       inputs: '{ "message": "blah blah", "debug": true }'
       wait-for-completion: true
 
-  - name: Another step that can handle the result
-    if: always()
-    run: echo "Another Workflow conclusion: ${{ steps.trigger-step.outputs.workflow-conclusion }}"
+   - name: Another step that can handle the result
+     if: always()
+     run: echo "Another Workflow conclusion:${{ steps.trigger-step.outputs.workflow-conclusion }}"
