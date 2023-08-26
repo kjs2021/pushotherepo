@@ -15,8 +15,16 @@ on:
  #     - Roll-back
 
 jobs:
+ Fail:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Invoke workflow in another repo with inputs
+     id: fail
+     run: ls
  Roll:
   runs-on: ubuntu-latest
+  if:  ${{ failure() }}
+  needs: [Fail]
   steps:
    - name: Invoke workflow in another repo with inputs
      id: trigger-step
