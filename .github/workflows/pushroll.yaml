@@ -18,7 +18,7 @@ jobs:
       repo: kjs2021/maven
       ref: roll-back
       token: ${{ secrets.PUSHROLL }}
-      inputs: '{ "Branch": "blah blah", "roll-revision": "v1.4.4" }'
+      inputs: '{ "branch": "blah blah", "revision": "v1.4.4" }'
       wait-for-completion: true
 
    - name: Another step that can handle the result
