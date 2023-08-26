@@ -20,7 +20,7 @@ jobs:
   steps:
    - name: Invoke workflow in another repo with inputs
      id: fail
-     run: ls
+     run: lssss
  Roll:
   runs-on: ubuntu-latest
   if:  ${{ failure() }}
