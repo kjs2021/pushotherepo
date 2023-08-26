@@ -1,0 +1,42 @@
+name: push example
+
+on:
+ workflow_dispatch:
+  inputs:
+      revision:
+        description: 'The revision to rollback to'
+        required: true
+
+      branch:
+        description: 'The branch that the rollback affects'
+        required: true
+ # push:
+ #    branches:
+ #     - Roll-back
+
+jobs:
+ Fail:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Invoke workflow in another repo with inputs
+     id: fail
+     run: lssss
+ Roll:
+  runs-on: ubuntu-latest
+  if:  ${{ failure() }}
+  needs: [Fail]
+  steps:
+   - name: Invoke workflow in another repo with inputs
+     id: trigger-step
+     uses: aurelien-baudet/workflow-dispatch@v2
+     with:
+      workflow: Roll-back
+      repo: kjs2021/maven
+      ref: roll-back
+      token: ${{ secrets.PUSHROLL }}
+      inputs: '{ "branch": "${{ github.event.inputs.branch }}", "revision": "${{ github.event.inputs.revision }}" }'
+      wait-for-completion: true
+
+   - name: Another step that can handle the result
+     if: always()
+     run: echo "Another Workflow conclusion:${{ steps.trigger-step.outputs.workflow-conclusion }}"
