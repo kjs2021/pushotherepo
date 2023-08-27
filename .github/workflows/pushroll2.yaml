@@ -31,7 +31,7 @@ jobs:
   steps:
    - name: Invoke workflow in another repo with inputs
      id: fail
-     run: lssss
+     run: ls
 
  trigger:
   runs-on: ubuntu-latest
