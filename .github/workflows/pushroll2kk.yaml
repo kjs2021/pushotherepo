@@ -12,10 +12,9 @@ on:
 
      
 env:
-  Image_name: kamaljeet
+  Image_name: kamaljeet-final
   Image_version: 1.11.66
-permissions: write-all
- 
+
 
 jobs:
 # current-version:
@@ -37,18 +36,25 @@ jobs:
   runs-on: ubuntu-latest
   if:  ${{ success() }}
   needs: [Fail]
-  permissions: write-all
+  
   steps:
       - name: updated Imagename and Image version 
         run: |
          echo  "New Image will be  ${{ env.Image_name }}:${{ env.Image_version }}"
       - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v2.1.1
+        id: trigger-step1
+        uses: aurelien-baudet/workflow-dispatch@v2
         with:
-          token: ${{ secrets.ROLLPAT }}
-          repository: kjs2021/maven
-          event-type: kk
-          client-payload: '{"img": "${{ env.Image_name }}","Image_version": "${{ env.Image_version }}"}'
+         workflow: kk Dispatch
+         repo: kjs2021/maven
+         ref: main
+         token: ${{ secrets.ROLLPAT }}
+         inputs: '{  "Version": "${{ env.Image_version}}" }'
+         wait-for-completion: true
+
+      - name: Another step that can handle the result
+        if: always()
+        run: echo "Another Workflow conclusion:${{ steps.trigger-step1.outputs.workflow-conclusion }}"
  ROll:  
    runs-on: ubuntu-latest
    environment: rollback
@@ -56,16 +62,16 @@ jobs:
    needs: [Fail]
    steps:
    - name: Invoke workflow in another repo with inputs
-     id: trigger-step
+     id: trigger-step2
      uses: aurelien-baudet/workflow-dispatch@v2
      with:
       workflow: kk Dispatch
       repo: kjs2021/maven
       ref: main
       token: ${{ secrets.ROLLPAT }}
-      inputs: '{  "Roll-revision": "${{ vars.ROLLVERSION }}" }'
+      inputs: '{  "Version": "${{ vars.ROLLVERSION }}" }'
       wait-for-completion: true
 
    - name: Another step that can handle the result
      if: always()
-     run: echo "Another Workflow conclusion:${{ steps.trigger-step.outputs.workflow-conclusion }}"
+     run: echo "Another Workflow conclusion:${{ steps.trigger-step2.outputs.workflow-conclusion }}"
