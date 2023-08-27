@@ -61,7 +61,7 @@ jobs:
       repo: kjs2021/maven
       ref: main
       token: ${{ secrets.ROLLPAT }}
-      inputs: '{  "Roll-revisionss": "${{ github.event.inputs.revision }}" }'
+      inputs: '{  "Roll-revision": "${{ github.event.inputs.revision }}" }'
       wait-for-completion: true
 
    - name: Another step that can handle the result
