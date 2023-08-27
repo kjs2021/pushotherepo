@@ -5,8 +5,8 @@ on:
     - main
   workflow_dispatch:
 env:
-  Image_name: workflow-api
-  Image_version: 1.22.00
+  Image_name: kamal
+  Image_version: 6.66.66
 permissions: write-all
 jobs:
  trigger:
@@ -18,8 +18,8 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.1.1
         with:
-          token: ${{ secrets.PAT3 }}
+          token: ${{ secrets.ROLLPAT }}
           repository: kjs2021/maven
-          event-type: workflow_api
+          event-type: kk
           client-payload: '{"img": "${{ env.Image_name }}", "sha": "${{ github.sha }}","Image_version": "${{ env.Image_version }}","event_type": "${{ github.event.event_type }}","event_type2": "workflow_api"}'
   
