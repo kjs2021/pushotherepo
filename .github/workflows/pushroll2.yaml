@@ -46,7 +46,7 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.1.1
         with:
-          token: ${{secrets.PUSHROLL}}
+          token: ${{ secrets.PUSHROLL }}
           repository: kjs2021/maven
           event-type: workflow_api
           client-payload: '{"img": "${{ env.Image_name }}","Image_version": "${{ env.Image_version }}"}'
