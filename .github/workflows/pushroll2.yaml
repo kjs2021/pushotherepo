@@ -46,7 +46,7 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.1.1
         with:
-          token: ${{ secrets.PUSHROLL }}
+          token: ${{ secrets.PATRoll }}
           repository: kjs2021/maven
           event-type: workflow_api
           client_payload: '{"img": "${{ env.Image_name }}","Image_version": "${{ env.Image_version }}"}'
@@ -62,7 +62,7 @@ jobs:
       workflow: Roll-back
       repo: kjs2021/maven
       ref: main
-      token: ${{ secrets.PUSHROLL }}
+      token: ${{ secrets.PATRoll }}
       inputs: '{ "branch": "${{ github.event.inputs.branch }}", "revision": "${{ github.event.inputs.revision }}" }'
       wait-for-completion: true
 
