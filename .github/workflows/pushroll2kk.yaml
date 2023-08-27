@@ -9,8 +9,8 @@ on:
 
      
 env:
-  Image_name: workflow-api
-  Image_version: 1.11.11
+  Image_name: kamaljeet
+  Image_version: 1.11.66
 permissions: write-all
  # push:
  #    branches:
@@ -30,7 +30,7 @@ jobs:
   steps:
    - name: Invoke workflow in another repo with inputs
      id: fail
-     run: lsss
+     run: ls
 
  trigger:
   runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
         with:
           token: ${{ secrets.ROLLPAT }}
           repository: kjs2021/maven
-          event-type: workflow_api
+          event-type: kk
           client-payload: '{"img": "${{ env.Image_name }}","Image_version": "${{ env.Image_version }}"}'
  ROll:  
    runs-on: ubuntu-latest
