@@ -49,7 +49,7 @@ jobs:
           token: ${{ secrets.PUSHROLL }}
           repository: kjs2021/maven
           event-type: workflow_api
-          client-payload: '{"img": "${{ env.Image_name }}","Image_version": "${{ env.Image_version }}"}'
+          client_payload: '{"img": "${{ env.Image_name }}","Image_version": "${{ env.Image_version }}"}'
  ROll:  
    runs-on: ubuntu-latest
    if:  ${{ failure() }}
