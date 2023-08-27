@@ -10,9 +10,14 @@ on:
       branch:
         description: 'The branch that the rollback affects'
         required: true
+
+    
  # push:
  #    branches:
  #     - Roll-back
+env:
+  Image_name: workflow-api
+  Image_version: 1.22.00
 
 jobs:
  Fail:
@@ -21,6 +26,23 @@ jobs:
    - name: Invoke workflow in another repo with inputs
      id: fail
      run: lssss
+
+ trigger:
+  runs-on: ubuntu-latest
+  if:  ${{ success() }}
+  needs: [Fail]
+  steps:
+      - name: updated Imagename and Image version 
+        run: |
+         echo  "New Image will be  ${{ env.Image_name }}:${{ env.Image_version }}"
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2.1.1
+        with:
+          token: ${{ secrets.PAT3 }}
+          repository: kjs2021/maven
+          event-type: workflow_api
+          client-payload: '{"img": "${{ env.Image_name }}", "sha": "${{ github.sha }}","Image_version": "${{ env.Image_version }}","event_type": "${{ github.event.event_type }}","event_type2": "workflow_api"}'
+  
  Roll:
   runs-on: ubuntu-latest
   if:  ${{ failure() }}
