@@ -10,29 +10,57 @@ on:
       branch:
         description: 'The branch that the rollback affects'
         required: true
+env:
+  Image_name: workflow-api
+  Image_version: 1.11.11
  # push:
  #    branches:
  #     - Roll-back
 
 jobs:
+# current-version:
+#    - name: Get latest release 
+#      uses: rez0n/actions-github-release@main
+#      id: node_release
+#       with:
+#         token: ${{ secrets.GITHUB_TOKEN }}
+#         repository: "kjs2021/maven"
+#         type: "latest"
  Fail:
   runs-on: ubuntu-latest
   steps:
    - name: Invoke workflow in another repo with inputs
      id: fail
      run: lssss
- Roll:
+
+ trigger:
   runs-on: ubuntu-latest
-  if:  ${{ failure() }}
+  if:  ${{ success() }}
   needs: [Fail]
+  permissions: write-all
   steps:
+      - name: updated Imagename and Image version 
+        run: |
+         echo  "New Image will be  ${{ env.Image_name }}:${{ env.Image_version }}"
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2.1.1
+        with:
+          token: ${{secrets.PUSHROLL}}
+          repository: kjs2021/maven
+          event-type: workflow_api
+          client-payload: '{"img": "${{ env.Image_name }}","Image_version": "${{ env.Image_version }}"}'
+ ROll:  
+   runs-on: ubuntu-latest
+   if:  ${{ failure() }}
+   needs: [Fail]
+   steps:
    - name: Invoke workflow in another repo with inputs
      id: trigger-step
      uses: aurelien-baudet/workflow-dispatch@v2
      with:
       workflow: Roll-back
       repo: kjs2021/maven
-      ref: roll-back
+      ref: main
       token: ${{ secrets.PUSHROLL }}
       inputs: '{ "branch": "${{ github.event.inputs.branch }}", "revision": "${{ github.event.inputs.revision }}" }'
       wait-for-completion: true
