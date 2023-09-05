@@ -22,12 +22,19 @@ jobs:
       #     repository: kjs2021/maven
       #     event-type: kk
       #     client-payload: '{"img": "${{ env.Image_name }}", "sha": "${{ github.sha }}","Image_version": "${{ env.Image_version }}","event_type": "${{ github.event.event_type }}","event_type2": "workflow_api"}'
-  
-      - name: get-file
+      - name: get-file1
         env:
          TOKEN: ${{ secrets.ROLLPAT1 }}
         run: |
-         VARIABLE_NAME="$(curl -H 'Authorization: token ${{ secrets.ROLLPAT1 }}' \
+         curl -H 'Authorization: token ${{ secrets.ROLLPAT1 }}' \
          -H 'Accept: application/vnd.github.v4.raw' \
-         -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2)"
-         cat  VARIABLE_NAME
+         -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2
+         
+      # - name: get-file
+      #   env:
+      #    TOKEN: ${{ secrets.ROLLPAT1 }}
+      #   run: |
+      #    VARIABLE_NAME="$(curl -H 'Authorization: token ${{ secrets.ROLLPAT1 }}' \
+      #    -H 'Accept: application/vnd.github.v4.raw' \
+      #    -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2)"
+      #    cat  VARIABLE_NAME
