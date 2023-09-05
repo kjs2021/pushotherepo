@@ -51,5 +51,5 @@ jobs:
           echo "hello image 3" >> VARIABLE_NAME
           cat  VARIABLE_NAME
           sed '1p' VARIABLE_NAME
-          echo $pwd >> pwd1
+          pwd >> pwd1
           cat pwd1
