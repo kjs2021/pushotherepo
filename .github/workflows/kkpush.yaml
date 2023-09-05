@@ -34,6 +34,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.ROLLPAT1 }}
         run: |
+          touch VARIABLE_NAME
           VARIABLE_NAME="$(curl -H 'Authorization: token ${{ secrets.ROLLPAT1 }}' \
           -H 'Accept: application/vnd.github.v4.raw' \
           -O \
