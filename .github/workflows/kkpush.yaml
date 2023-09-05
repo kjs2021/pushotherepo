@@ -27,5 +27,7 @@ jobs:
         env:
          TOKEN: ${{ secrets.ROLLPAT1 }}
         run: |
-         DEPLOYYAML="$( curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/kjs2021/maven/contents/MyFirstFolder/hello2 )"
-         cat DEPLOYYAML
+         VARIABLE_NAME="$(curl -H 'Authorization: token ${{ secrets.ROLLPAT1 }}' \
+         -H 'Accept: application/vnd.github.v4.raw' \
+         -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2)"
+         cat  VARIABLE_NAME
