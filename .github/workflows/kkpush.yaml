@@ -34,13 +34,13 @@ jobs:
         env:
           TOKEN: ${{ secrets.ROLLPAT1 }}
         run: |
-          touch VARIABLE_NAME
-          VARIABLE_NAME="$(curl -H 'Authorization: token ${{ secrets.ROLLPAT1 }}' \
+          touch VARIABLE_NAME1
+          echo "$(curl -H 'Authorization: token ${{ secrets.ROLLPAT1 }}' \
           -H 'Accept: application/vnd.github.v4.raw' \
           -O \
-          -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2)"
-          cat  VARIABLE_NAME
-          sed '1p' VARIABLE_NAME
+          -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2)" >>VARIABLE_NAME1
+          cat  VARIABLE_NAME1
+          sed '1p' VARIABLE_NAME1
 
       - name: get-file3
         env:
