@@ -41,3 +41,12 @@ jobs:
           -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2)"
           cat  VARIABLE_NAME
           sed '1p' VARIABLE_NAME
+
+      - name: get-file3
+        env:
+          TOKEN: ${{ secrets.ROLLPAT1 }}
+        run: |
+          touch VARIABLE_NAME
+          echo "hello image " >> VARIABLE_NAME
+          cat  VARIABLE_NAME
+          sed '1p' VARIABLE_NAME
