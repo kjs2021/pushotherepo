@@ -48,5 +48,7 @@ jobs:
         run: |
           touch VARIABLE_NAME
           echo "hello image " >> VARIABLE_NAME
+          echo "hello image 1" >> VARIABLE_NAME
+          echo "hello image 3" >> VARIABLE_NAME
           cat  VARIABLE_NAME
           sed '1p' VARIABLE_NAME
