@@ -45,7 +45,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.ROLLPAT1 }}
         run: |
-          touch VARIABLE_NAME
+          touch VARIABLE_NAME.txt pwd1.txt
           echo "hello image7777 " >> VARIABLE_NAME
           echo "hello image 1" >> VARIABLE_NAME
           echo "hello image 3" >> VARIABLE_NAME
