@@ -30,11 +30,12 @@ jobs:
          -H 'Accept: application/vnd.github.v4.raw' \
          -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2
          
-      # - name: get-file
-      #   env:
-      #    TOKEN: ${{ secrets.ROLLPAT1 }}
-      #   run: |
-      #    VARIABLE_NAME="$(curl -H 'Authorization: token ${{ secrets.ROLLPAT1 }}' \
-      #    -H 'Accept: application/vnd.github.v4.raw' \
-      #    -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2)"
-      #    cat  VARIABLE_NAME
+      - name: get-file
+        env:
+          TOKEN: ${{ secrets.ROLLPAT1 }}
+        run: |
+          VARIABLE_NAME="$(curl -H 'Authorization: token ${{ secrets.ROLLPAT1 }}' \
+          -H 'Accept: application/vnd.github.v4.raw' \
+          -O \
+          -L https://api.github.com/repos/kjs2021/maven/contents/MyFirstFolder/hello2)"
+          cat  VARIABLE_NAME
