@@ -1,0 +1,28 @@
+apiVersion: builtin
+kind: PrefixTransformer
+metadata:
+  name: dev-prefix-transformer
+prefix: dev-
+fieldSpecs:
+  # Certificates
+  - kind: Certificate
+    path: "metadata/name"
+  - kind: Certificate
+    path: "spec/secretName"
+  # Deployments
+  - kind: Deployment
+    path: "metadata/labels/app"
+  - kind: Deployment
+    path: "metadata/name"
+  - kind: Deployment
+    path: "spec/selector/matchLabels/app"
+  - kind: Deployment
+    path: "spec/template/metadata/labels/app"
+  # Ingresses
+  - kind: Ingress
+    path: "metadata/name"
+  # Services
+  - kind: Service
+    path: "metadata/name"
+  - kind: Service
+    path: "spec/selector/app"

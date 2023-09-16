@@ -1,0 +1,25 @@
+ Get-existing-version:
+  needs: QAtest-cond
+  if: needs.QAtest-cond.outputs.myVar == 'true'
+  runs-on: [self-hosted, Linux, X64, enterprise, onprem]
+  outputs:
+      existing-version: ${{ steps.existing-version.outputs.EXIST-VER }}
+  steps:
+   - uses: actions/checkout@v3
+     with:
+      repository: HCAHealthtrust/smr-argo-apps
+      token: ${{ secrets.ARGO_TOKEN }}
+      sparse-checkout: |
+       item/base/deployments.yaml
+
+
+------------------------
+
+ version=$(grep 'image: ${{ env.REGISTRY_URL }}/${{ env.IMAGE_NAME }}' deployments.yaml | cut -d: -f 3)
+
+
+  - run: |
+         echo "Workflow trigger by Image_name  -->  ${{ env.Image_name }}:${{ env.Image_version }}"
+         sed -i 's|image: ${{ env.REGISTRY_URL }}/${{ env.Image_name }}:.*|image: ${{ env.REGISTRY_URL }}/${{ env.Image_name }}:${{ env.Image_version }}|' ${{ env.Filename }}
+
+  

@@ -1,0 +1,9 @@
+#
+# Modifies the ../base/certificate.yaml configuration results
+#
+- op: add
+  path: "/spec/dnsNames"
+  value:
+    [
+     dev-item-save-api.healthtrustpg.com,
+    ]

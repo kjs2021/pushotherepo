@@ -1,0 +1,6 @@
+#
+# Modifies all ../base/*.yaml configuration results for scoped kind
+#
+- op: replace
+  path: "/metadata/namespace"
+  value: smr-item-dev
