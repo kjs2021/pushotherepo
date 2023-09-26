@@ -38,7 +38,7 @@ jobs:
              owner: kjs2021
              repo: maven
              token: ${{ secrets.PUSHANDWAIT }}
-             run-id: ${{ steps.startWorkflow.outputs.run-id }}
+             #run-id: ${{ steps.startWorkflow.outputs.run-id }}
              
          - name: "waitcomplete"
            run: |
