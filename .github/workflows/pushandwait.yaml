@@ -10,19 +10,36 @@ jobs:
      runs-on: ubuntu-latest
      steps:
 
-         - name: Deploy Your Service
-           uses: adityakar/workflow-dispatcher@v1.0
+         # - name: Deploy Your Service
+         #   uses: adityakar/workflow-dispatcher@v1.0
+         #   with:
+         #    owner: kjs2021
+         #    repo: maven
+         #    token: ${{ secrets.PUSHANDWAIT }}
+         #    event_type: wait
+         #    client_payload: '{"image": "3.3.3"}'
+         #    wait_time: 5
+         #    max_time: 180
+
+         - name: "Start a workflow"
+           id: startWorkflow
+           uses: mathze/workflow-dispatch-action@v1.1.0
            with:
+            workflow-name: pushandwait.yaml
             owner: kjs2021
             repo: maven
             token: ${{ secrets.PUSHANDWAIT }}
-            event_type: wait
-            client_payload: '{"image": "3.3.3"}'
-            wait_time: 5
-            max_time: 180
+#...
+         - name: "wait to complete"
+           uses: mathze/workflow-dispatch-action@v1.1.0
+           with:
+             token: ${{ secrets.PUSHANDWAIT }}
+             run-id: ${{ steps.startWorkflow.outputs.run-id }}
+
        #  - name: Invoke workflow and handle result
        #    id: trigger-step
        #    uses: aurelien-baudet/workflow-dispatch@v2
+          #  uses: mathze/workflow-dispatch-action@v1.1.0
        #    with:
        #     workflow: Another Workflow
        #     repo: kjs2021/maven
