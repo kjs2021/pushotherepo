@@ -31,18 +31,18 @@ jobs:
             token: ${{ secrets.PUSHANDWAIT }}
             payload: '{ "revision": "6.6.6" }'
 #...
-         - name: wait to complete
-           uses: mathze/workflow-dispatch-action@v1.1.0
-           with:
-             workflow-name: pushandwait.yaml
-             owner: kjs2021
-             repo: maven
-             token: ${{ secrets.PUSHANDWAIT }}
-             #run-id: ${{ steps.startWorkflow.outputs.run-id }}
+         # - name: wait to complete
+         #   uses: mathze/workflow-dispatch-action@v1.1.0
+         #   with:
+         #     workflow-name: pushandwait.yaml
+         #     owner: kjs2021
+         #     repo: maven
+         #     token: ${{ secrets.PUSHANDWAIT }}
+         #     #run-id: ${{ steps.startWorkflow.outputs.run-conclusion }}
              
          - name: "waitcomplete"
            run: |
-            echo "workflow status ${{ steps.startWorkflow.outputs.run-status  }}"
+            echo "workflow status ${{ steps.startWorkflow.outputs.run-conclusion  }}"
 
        #  - name: Invoke workflow and handle result
        #    id: trigger-step
