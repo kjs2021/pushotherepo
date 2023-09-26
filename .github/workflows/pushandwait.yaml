@@ -11,7 +11,7 @@ jobs:
      steps:
 
          - name: Deploy Your Service
-           uses: adityakar/workflow-dispatcher@master
+           uses: adityakar/workflow-dispatcher@v1.0
            with:
             owner: kjs2021
             repo: maven
