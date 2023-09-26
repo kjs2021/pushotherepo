@@ -29,6 +29,7 @@ jobs:
             owner: kjs2021
             repo: maven
             token: ${{ secrets.PUSHANDWAIT }}
+            payload: '{ "revision": "0.0.5" }'
 #...
          - name: "wait to complete"
            uses: mathze/workflow-dispatch-action@v1.1.0
