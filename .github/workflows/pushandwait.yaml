@@ -30,6 +30,7 @@ jobs:
             repo: maven
             token: ${{ secrets.PUSHANDWAIT }}
             payload: '{ "revision": "6.6.6" }'
+            wait-timeout: 60
 #...
          # - name: wait to complete
          #   uses: mathze/workflow-dispatch-action@v1.1.0
