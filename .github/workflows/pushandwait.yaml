@@ -1,0 +1,25 @@
+name: push-and-wait
+on: 
+ push:
+    branches: [ "main" ]
+ workflow_dispatch:
+
+
+ jobs:
+  checkout:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Invoke workflow and handle result
+         id: trigger-step
+         uses: aurelien-baudet/workflow-dispatch@v2
+         with:
+          workflow: Another Workflow
+          token: ${{ secrets.pushandwait }}
+          inputs: '{ "revision": "0.0.5" }'
+
+         
+      -  name: Another step that can handle the result
+         if: always()
+         run: echo "Another Workflow conclusion: ${{ steps.trigger-step.outputs.workflow-conclusion }}"
+
+
