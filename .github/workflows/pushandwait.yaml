@@ -9,19 +9,30 @@ jobs:
   ANDWAIT:
      runs-on: ubuntu-latest
      steps:
-       - name: Invoke workflow and handle result
-         id: trigger-step
-         uses: aurelien-baudet/workflow-dispatch@v2
-         with:
-          workflow: Another Workflow
-          repo: kjs2021/maven
-          token: ${{ secrets.PUSHANDWAIT }}
-          inputs: '{ "revision": "0.0.5" }'
+
+         - name: Deploy Your Service
+           uses: adityakar/workflow-dispatcher@v1
+           with:
+            owner: kjs2021
+            repo: maven
+            token: ${{ secrets.PUSHANDWAIT }}
+            event_type: wait
+            client_payload: '{"image": "3.3.3"}'
+            wait_time: 5
+            max_time: 180
+       #  - name: Invoke workflow and handle result
+       #    id: trigger-step
+       #    uses: aurelien-baudet/workflow-dispatch@v2
+       #    with:
+       #     workflow: Another Workflow
+       #     repo: kjs2021/maven
+       #    token: ${{ secrets.PUSHANDWAIT }}
+       #    inputs: '{ "revision": "0.0.5" }'
 
          
-       - name: Another step that can handle the result
-         if: always()
-         run: |
-          echo "Another Workflow conclusion: ${{ steps.trigger-step.outputs.workflow-conclusion }}"
+       # - name: Another step that can handle the result
+       #   if: always()
+       #   run: |
+       #    echo "Another Workflow conclusion: ${{ steps.trigger-step.outputs.workflow-conclusion }}"
 
 
