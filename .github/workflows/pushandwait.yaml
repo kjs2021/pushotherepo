@@ -30,7 +30,6 @@ jobs:
             repo: maven
             token: ${{ secrets.PUSHANDWAIT }}
             payload: '{ "revision": "6.6.6" }'
-            wait-timeout: 60
             run-id: dummy
 #...
          # - name: wait to complete
